@@ -3,12 +3,14 @@ import Register from "./components/Register";
 import Login from "./components/Login";
 import Dashboard from "./components/Dashboard";
 import CampaignDashboard from "./components/CampaignDashboard";
+import InvoiceDashboard from "./components/InvoiceDashboard";
+
 
 const App = () => {
   const [token, setToken] = useState(localStorage.getItem("token") || null);
 
   return token ? (
-    <CampaignDashboard token={token} />
+    <InvoiceDashboard token={token} />
   ) : (
     <div>
       <Register />

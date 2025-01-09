@@ -3,12 +3,15 @@ const cors = require("cors");
 const dotenv = require("dotenv");
 const authRoutes = require("./routes/auth");
 const campaignRoutes = require("./routes/campaign");
+const invoiceRoutes = require("./routes/invoices");
+
 
 dotenv.config();
 const app = express();
 
 app.use(cors());
 app.use(express.json());
+app.use("/invoices", invoiceRoutes);
 
 // Routes
 app.use("/auth", authRoutes);
