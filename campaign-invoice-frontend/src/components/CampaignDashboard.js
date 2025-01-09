@@ -32,6 +32,7 @@ const CampaignDashboard = ({ token }) => {
     formData.append("file", file);
 
     try {
+      console.log("Token: is front end", token);
       await axios.post("http://localhost:5000/campaigns/upload", formData, {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -41,7 +42,6 @@ const CampaignDashboard = ({ token }) => {
       alert("Campaigns uploaded successfully!");
       fetchCampaigns(); // Refresh the list
     } catch (error) {
-
       console.error("Error Response:", error.response);
 
   // Check if the error response is available and print the specific message

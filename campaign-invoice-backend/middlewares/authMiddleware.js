@@ -1,18 +1,24 @@
 const jwt = require("jsonwebtoken");
+require("dotenv").config();
 
 const authenticateToken = (req, res, next) => {
-  const token = req.header("Authorization");
-
-  if (!token) {
+  
+  const token1 = req.header("Authorization");                //personal changes @@
+  if (!token1) {
     return res.status(401).json({ message: "Access denied" });
   }
-
+  const token = token1.split(" ")[1];
+  const status=true;
   try {
     const verified = jwt.verify(token, process.env.JWT_SECRET);
-    req.user = verified;
+    req.user=verified;
+    console.log("me hu");
     next();
   } catch (error) {
-    res.status(400).json({ message: "Invalid token" });
+    console.log("JWT verification failed:", error.message);
+    res.status(400).json({ message: "Invalid token",
+      status:status,
+    check: token });
   }
 };
 
