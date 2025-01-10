@@ -1,0 +1,4 @@
+user_id,invoice_date,amount,status
+1,21-01-2024,500.75,paid
+2,22-02-2024,1000,pending
+3,23-03-2024,750.25,overdue

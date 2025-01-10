@@ -10,7 +10,8 @@ const authenticateToken = (req, res, next) => {
   const token = token1.split(" ")[1];
   const status=true;
   try {
-    const verified = jwt.verify(token, process.env.JWT_SECRET);
+    const verified = jwt.verify(token, process.env.JWT_SECRET);           //verified is nothing but the payload which is send
+    console.log(verified);
     req.user=verified;
     console.log("me hu");
     next();

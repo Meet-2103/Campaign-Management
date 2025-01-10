@@ -98,10 +98,11 @@ const InvoiceDashboard = ({ token }) => {
                 <td>{invoice.id}</td>
                 <td>{invoice.user_id}</td>
                 <td>{invoice.invoice_date}</td>
-                <td>${invoice.amount.toFixed(2)}</td>
+                <td>${Number(invoice.
+                amount)}</td>
                 <td>{invoice.status}</td>
                 <td>
-                  <button onClick={() => downloadPDF(invoice.id)}>Download PDF</button>
+                  <button onClick={() => downloadPDF(invoice.user_id)}>Download PDF</button>
                 </td>
               </tr>
             ))}

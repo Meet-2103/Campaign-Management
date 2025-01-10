@@ -46,8 +46,8 @@ router.post("/upload", authenticateToken, upload.single("file"), async (req, res
 // List Invoices
 router.get("/", authenticateToken, async (req, res) => {
   try {
-    const { user_id } = req.user;
-    const result = await pool.query("SELECT * FROM invoices WHERE user_id = $1", [user_id]);
+    const { id } = req.user;                        
+    const result = await pool.query("SELECT * FROM invoices WHERE user_id = $1", [id]);
     res.json(result.rows);
   } catch (error) {
     console.error(error.message);
@@ -60,7 +60,7 @@ router.get("/pdf/:id", authenticateToken, async (req, res) => {
   const { id } = req.params;
 
   try {
-    const result = await pool.query("SELECT * FROM invoices WHERE id = $1", [id]);
+    const result = await pool.query("SELECT * FROM invoices WHERE user_id = $1", [id]);
     const invoice = result.rows[0];
 
     if (!invoice) {
@@ -76,7 +76,7 @@ router.get("/pdf/:id", authenticateToken, async (req, res) => {
     doc.fontSize(12).text(`Invoice ID: ${invoice.id}`);
     doc.text(`User ID: ${invoice.user_id}`);
     doc.text(`Date: ${invoice.invoice_date}`);
-    doc.text(`Amount: $${invoice.amount.toFixed(2)}`);
+    doc.text(`Amount: $${invoice.amount}`);
     doc.text(`Status: ${invoice.status}`);
     doc.end();
 
